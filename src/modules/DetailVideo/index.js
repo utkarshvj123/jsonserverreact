@@ -94,6 +94,8 @@ class DetailVideo extends Component {
       });
 
       this.props.callingPutApi(this.state.olderApplicationData);
+      alert("Successfully saved");
+      this.props.history.push("/dash");
     } else {
       console.log("see in else");
     }
