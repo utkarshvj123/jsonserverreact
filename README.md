@@ -5,12 +5,12 @@ Used multiple libraries like=>
 2. redux=>used redux for state management.
 3.styledcomponents=> used to provide style as a prop to common components from derived component.
 
-I have created a web-app where you need to register first and the you can signin which th same credential after that you can get your cards having the required data in that then you have to click on detail button so that your modal will open and get your detail of starting and ending time.
-
-
 Without sigin you are unable to go to other router for that i have created another route container class.
 
+created a common card component which is used for displaying videos data as well as dashboard data or the data with name, and after click on submit you can go to another component where if the detail exist then it will display that detail with video and if thats not exist then alert show that no video found.
 
+
+if you have any other doubt the please call me.
 
 
 
