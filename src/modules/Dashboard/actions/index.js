@@ -40,15 +40,6 @@ export function getQuestions() {
     });
   };
 }
-// //-----Modal popup-------//
-// export function modalPopUp(value) {
-//   return dispatch => {
-//     dispatch({
-//       type: MODAL_POP_UP,
-//       payload: value
-//     });
-//   };
-// }
 
 export function selectedApplicationData(value) {
   return (dispatch) => {
@@ -60,14 +51,15 @@ export function selectedApplicationData(value) {
 }
 
 export function callingPutApi(value) {
-  Axios.put("http://localhost:3000/applications/" + value.id, value).then(
-    (res) => {
-      return (dispatch) => {
-        dispatch({
-          type: DETAIL_SELECTED,
-          payload: value,
-        });
-      };
-    }
-  );
+  Axios.put(
+    "http://localhost:3000/applications/" + value.id,
+    value
+  ).then((res) => console.log(res, ".....seee calling put api"));
+
+  return (dispatch) => {
+    dispatch({
+      type: DETAIL_SELECTED,
+      payload: value,
+    });
+  };
 }

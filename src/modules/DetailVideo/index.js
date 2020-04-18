@@ -31,6 +31,7 @@ const Container = styled.div`
 class DetailVideo extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       olderApplicationData: {},
       selectedApplication: {},
@@ -39,27 +40,23 @@ class DetailVideo extends Component {
   }
 
   componentDidMount() {
-    console.log(
-      this.props.questionsData,
-      ".........",
-      this.props.selectedApplicationDetail
-    );
-
-    this.setState({
-      olderApplicationData: this.props.selectedApplicationDetail,
-    });
-    this.props.selectedApplicationDetail.videos.forEach((obj1) => {
-      this.props.questionsData.filter((obj2) => {
-        if (obj1.questionId === obj2.id) {
-          obj1["question"] = obj2.question;
-          //   obj1["visibility"] = true;
-        }
+    if (!this.props.isValidUser) {
+      this.props.history.push("/login");
+    } else {
+      this.setState({
+        olderApplicationData: this.props.selectedApplicationDetail,
       });
-    });
-    console.log(this.props.selectedApplicationDetail, "....seeeeee");
-    this.setState({
-      selectedApplication: this.props.selectedApplicationDetail,
-    });
+      this.props.selectedApplicationDetail.videos.forEach((obj1) => {
+        this.props.questionsData.filter((obj2) => {
+          if (obj1.questionId === obj2.id) {
+            obj1["question"] = obj2.question;
+          }
+        });
+      });
+      this.setState({
+        selectedApplication: this.props.selectedApplicationDetail,
+      });
+    }
   }
   arrayCreation = [];
   containsObject = (list, index) => {
@@ -79,18 +76,10 @@ class DetailVideo extends Component {
         }
       });
     } else return this.arrayCreation.push({ index, comments: e.target.value });
-    console.log(this.arrayCreation, ".....array creaton");
   };
 
   handleClickValue = (object, indexValue) => {
-    console.log(
-      object,
-      indexValue,
-      ".......printing array",
-      this.arrayCreation
-    );
     let newValueArr = {};
-    console.log(this.state, "....state");
     if (this.arrayCreation.length) {
       newValueArr = this.arrayCreation.find((obj) => {
         object.comments = obj.comments;
@@ -105,20 +94,12 @@ class DetailVideo extends Component {
       });
 
       this.props.callingPutApi(this.state.olderApplicationData);
-      console.log(
-        object,
-        "seee if",
-        newValueArr,
-        "state",
-        this.state.olderApplicationData
-      );
     } else {
       console.log("see in else");
     }
   };
 
   render() {
-    // console.log(this.state);
     return (
       <div>
         <Container>
@@ -173,6 +154,7 @@ class DetailVideo extends Component {
 }
 
 const mapStateToProps = ({
+  isValidUser,
   dashBoardData: {
     candidateData,
     applicationData,
@@ -181,6 +163,7 @@ const mapStateToProps = ({
   },
 }) => {
   return {
+    isValidUser,
     candidateData,
     questionsData,
     applicationData,
